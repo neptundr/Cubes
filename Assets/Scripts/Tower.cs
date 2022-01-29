@@ -9,11 +9,13 @@ using Random = UnityEngine.Random;
 public class Tower
 {
     public static UnityEvent<Player> GiveResourceToPlayer = new UnityEvent<Player>();
+    public static List<Tower> teleportTowers = new List<Tower>();
 
     private List<Tower> connectedTowers;
     private int level = 1;
     private bool isExpensive;
     private bool isNullTower;
+    private bool isTeleportTower;
     private Player owner;
     private Tower representationOf;
     private TowerVisualizer towerVisualizer;
@@ -27,28 +29,37 @@ public class Tower
         representationOf = representation;
         if (representationOf is null)
         {
-            if (Map.GetExpensiveTowerChance() != 0 && Random.Range(Map.GetExpensiveTowerChance(), 100) == Map.GetExpensiveTowerChance())
+            if (Map.GetExpensiveTowerChance() != 0 && Random.Range(0, 100) <= Map.GetExpensiveTowerChance())
             {
                 isExpensive = true;
             }
-            else if (Map.GetNullTowerChance() != 0 && Random.Range(Map.GetNullTowerChance(), 100) == Map.GetNullTowerChance())
+            else if (Map.GetNullTowerChance() != 0 && Random.Range(0, 100) <= Map.GetNullTowerChance())
             {
                 isNullTower = true;
-                level = 0;
+            }
+            else if (Map.GetTeleportTowerChance() != 0 && Random.Range(0, 100) <= Map.GetTeleportTowerChance())
+            {
+                isTeleportTower = true;
             }
         }
         else
         {
             isExpensive = representationOf.isExpensive;
             isNullTower = representationOf.isNullTower; if (isNullTower) level = 0;
+            isTeleportTower = representationOf.isTeleportTower;
         }
+        
+        if (isNullTower) level = 0;
+        if (isTeleportTower) teleportTowers.Add(this);
+        
         towerVisualizer.Init(this);
         GiveResourceToPlayer.AddListener(GiveResource);
     }
 
     public Vector2Int GetPosition() => position;
-    public bool IsExpensive() => isExpensive;
+    public bool IsExpensiveTower() => isExpensive;
     public bool IsNullTower() => isNullTower;
+    public bool IsTeleportTower() => isTeleportTower;
     public List<Tower> GetConnectedTower() => connectedTowers;
     public TowerVisualizer GetTowerVisualizer() => towerVisualizer;
 
@@ -186,6 +197,14 @@ public class Tower
                         towerVisualizer.DrawDiagonal(diagonal);
                     }
                 }
+            }
+        }
+
+        if (isTeleportTower)
+        {
+            foreach (Tower teleportTower in teleportTowers)
+            {
+                connectedTowers.Add(teleportTower);
             }
         }
     }

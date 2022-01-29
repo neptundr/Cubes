@@ -15,11 +15,11 @@ public class SliderSL : UISL
 
     protected override void Load()
     {
-        slider.value = Convert.ToInt32(MenuConfigurator.LoadValue(lineIndex));
+        slider.value = Convert.ToInt32(SaveLoader.LoadValueNumber(MenuConfigurator.GetPath(), lineIndex));
     }
 
     public override void Save()
     {
-        MenuConfigurator.SaveValue(lineIndex, slider.value.ToString());
+        SaveLoader.SaveValue(MenuConfigurator.GetPath(), lineIndex, slider.value.ToString());
     }
 }

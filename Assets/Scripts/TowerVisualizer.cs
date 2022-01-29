@@ -10,6 +10,7 @@ public class TowerVisualizer : MonoBehaviour
     [SerializeField] private GameObject selectedMarker;
     [SerializeField] private GameObject expensiveMarker;
     [SerializeField] private GameObject nullTowerMarker;
+    [SerializeField] private GameObject teleportMarker;
     [SerializeField] private GameObject diagonal;
     [SerializeField] private Renderer model;
     [SerializeField] private Transform modelPivot;
@@ -27,8 +28,9 @@ public class TowerVisualizer : MonoBehaviour
 
         selectedMarker.SetActive(false);
         goToMarker.gameObject.SetActive(false);
-        expensiveMarker.SetActive(tower.IsExpensive());
+        expensiveMarker.SetActive(tower.IsExpensiveTower());
         nullTowerMarker.SetActive(tower.IsNullTower());
+        teleportMarker.SetActive(tower.IsTeleportTower());
         
         UpdateLevel();
     }
@@ -39,7 +41,7 @@ public class TowerVisualizer : MonoBehaviour
         {
             Instantiate(diagonal,
                 new Vector3(transform.position.x + i * diagonalStruct.direction.x * Map.GetDensity(),
-                    transform.position.y, transform.position.z + i * diagonalStruct.direction.y * Map.GetDensity()),
+                    transform.position.y - 0.5f, transform.position.z + i * diagonalStruct.direction.y * Map.GetDensity()),
                 Quaternion.Euler(0, DirectionToAngle(diagonalStruct.direction), 0), transform);
         }
     }

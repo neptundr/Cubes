@@ -25,6 +25,11 @@ public class Player
         startTower.SetLevel(startLevel);
     }
 
+    public int GetMyTowersCount()
+    {
+        return myTowers.Count;
+    }
+
     public void AddTower(Tower tower)
     {
         myTowers.Add(tower);

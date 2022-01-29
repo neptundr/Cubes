@@ -15,11 +15,11 @@ public class ToggleSL : UISL
 
     protected override void Load()
     {
-        toggle.isOn = Convert.ToInt32(MenuConfigurator.LoadValue(lineIndex)) == 1;
+        toggle.isOn = Convert.ToInt32(SaveLoader.LoadValueNumber(MenuConfigurator.GetPath(), lineIndex)) == 1;
     }
 
     public override void Save()
     {
-        MenuConfigurator.SaveValue(lineIndex, (toggle.isOn ? 1 : 0).ToString());
+        SaveLoader.SaveValue(MenuConfigurator.GetPath(), lineIndex, (toggle.isOn ? 1 : 0).ToString());
     }
 }

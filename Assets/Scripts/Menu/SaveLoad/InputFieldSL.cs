@@ -15,11 +15,11 @@ public class InputFieldSL : UISL
 
     protected override void Load()
     {
-        inputField.text = MenuConfigurator.LoadValue(lineIndex);
+        inputField.text = SaveLoader.LoadValueNumber(MenuConfigurator.GetPath(), lineIndex);
     }
 
     public override void Save()
     {
-        MenuConfigurator.SaveValue(lineIndex, inputField.text);
+        SaveLoader.SaveValue(MenuConfigurator.GetPath(), lineIndex, inputField.text);
     }
 }

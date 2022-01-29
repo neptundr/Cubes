@@ -13,27 +13,15 @@ public class MenuConfigurator : MonoBehaviour
     private static string path;
     public static UnityEvent Load = new UnityEvent();
 
+    [SerializeField] private GameObject localGroup;
+    [SerializeField] private GameObject networkGroup;
+    
     public void MakeEven(Slider slider) => slider.value = 
         Convert.ToInt32(slider.value) - ((Convert.ToInt32(slider.value) % 2 != 0) ? 1 : 0);
     public void MakeEven(InputField inputField) => inputField.text =
         (Convert.ToInt32(inputField.text) - ((Convert.ToInt32(inputField.text) % 2 != 0) ? 1 : 0)).ToString();
 
-    public static void SaveValue(int lineIndex, string value)
-    {
-        List<String> lines = File.ReadAllLines(path).ToList();
-
-        while(lines.Count - 1 < lineIndex) lines.Add("0");
-        lines[lineIndex] = value;
-
-        File.WriteAllLines(path, lines);
-    }
-
-    public static string LoadValue(int lineIndex)
-    {
-        List<String> lines = File.ReadAllLines(path).ToList();
-        if (lines.Count - 1 < lineIndex) return "0";
-        else return lines[lineIndex] == "" ? "0" : lines[lineIndex];
-    }
+    public static string GetPath() => path;
 
     public void GoToGame()
     {
@@ -52,5 +40,17 @@ public class MenuConfigurator : MonoBehaviour
         }
         
         Load.Invoke();
+    }
+
+    public void SetLocal()
+    {
+        localGroup.SetActive(true);
+        networkGroup.SetActive(false);
+    }
+
+    public void SetNetwork()
+    {
+        localGroup.SetActive(false);
+        networkGroup.SetActive(true);
     }
 }
