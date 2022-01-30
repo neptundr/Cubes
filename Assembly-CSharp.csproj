@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Menu\SaveLoad\SliderSL.cs" />
      <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
      <Compile Include="Assets\Scripts\GameNetworkManager.cs" />
+     <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\Map.cs" />
      <Compile Include="Assets\Scripts\Menu\SaveLoad\InputFieldSL.cs" />
      <Compile Include="Assets\Scripts\Menu\SliderColorSetter.cs" />
@@ -69,7 +70,6 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Menu\ColorPicker.cs" />
      <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
-     <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <None Include="Assets\StreamingAssets\ConfigurationFiles\сonfig.txt" />
      <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
      <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />

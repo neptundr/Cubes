@@ -15,6 +15,8 @@ public class MenuConfigurator : MonoBehaviour
 
     [SerializeField] private GameObject localGroup;
     [SerializeField] private GameObject networkGroup;
+    [SerializeField] private GameObject colorGroup;
+    [SerializeField] private GameObject mapConfigurationGroup;
     
     public void MakeEven(Slider slider) => slider.value = 
         Convert.ToInt32(slider.value) - ((Convert.ToInt32(slider.value) % 2 != 0) ? 1 : 0);
@@ -46,11 +48,25 @@ public class MenuConfigurator : MonoBehaviour
     {
         localGroup.SetActive(true);
         networkGroup.SetActive(false);
+        colorGroup.SetActive(false);
     }
 
     public void SetNetwork()
     {
         localGroup.SetActive(false);
         networkGroup.SetActive(true);
+        colorGroup.SetActive(false);
+    }
+
+    public void SetColors()
+    {
+        localGroup.SetActive(false);
+        networkGroup.SetActive(false);
+        colorGroup.SetActive(true);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
